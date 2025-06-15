@@ -1,7 +1,11 @@
 import { json } from "express";
 import User from "../models/User.js";
-import { Webhook, webhook } from "svix";
-import { Message } from "svix/dist/api/message.js";
+// import { Webhook, webhook } from "svix";
+// import { Message } from "svix/dist/api/message.js";
+
+import pkg from "svix";
+const { Webhook } = pkg;
+
 
 const clerkWebhooks = async (req ,res) =>{
     try{
@@ -16,14 +20,14 @@ const clerkWebhooks = async (req ,res) =>{
         }
 
         // verfying headers
-        await whook.verify(json.stringfy(req.body), headers)
+        await whook.verify(json.stringify(req.body), headers)
 
         // Getting Data from request body
 
         const {data,type} =req.body
         const userData ={
             _id: data.id,
-            email: data.email_addresses[0].email_addresses,
+            email: data.email_addresses[0].email_address,
             username: data.first_name + " " +data.last_name,
             image: data.image_url,
         }
