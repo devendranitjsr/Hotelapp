@@ -6,6 +6,8 @@ import { Webhook } from "svix";
 // import pkg from "svix";
 // const { Webhook } = pkg;
 
+// import connectDB from "../config/connectDB.js"; // path correct rakhna
+// connectDB(); // ✅ ye call hona chahiye webhook ke start mein
 
 const clerkWebhooks = async (req ,res) =>{
     try{
@@ -20,10 +22,9 @@ const clerkWebhooks = async (req ,res) =>{
         }
 
         // verfying headers
-        await whook.verify(json.stringify(req.body), headers)
+        await whook.verify(JSON.stringify(req.body), headers)
 
         // Getting Data from request body
-
         const {data,type} =req.body
 
         const userData ={
