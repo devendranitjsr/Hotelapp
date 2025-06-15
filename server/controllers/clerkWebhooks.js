@@ -1,13 +1,6 @@
-// import { json } from "express";
 import User from "../models/User.js";
 import { Webhook } from "svix";
-// import { Message } from "svix/dist/api/message.js";
 
-// import pkg from "svix";
-// const { Webhook } = pkg;
-
-// import connectDB from "../config/connectDB.js"; // path correct rakhna
-// connectDB(); // ✅ ye call hona chahiye webhook ke start mein
 
 const clerkWebhooks = async (req ,res) =>{
     try{
@@ -25,7 +18,7 @@ const clerkWebhooks = async (req ,res) =>{
         await whook.verify(JSON.stringify(req.body), headers)
 
         // Getting Data from request body
-        const {data,type} =req.body
+        const {data,type} = req.body
 
         const userData ={
             _id: data.id,
