@@ -20,6 +20,8 @@ const clerkWebhooks = async (req ,res) =>{
         // Getting Data from request body
         const {data,type} = req.body
 
+        // console.log("WEBHOOK BODY: ", req.body);
+
         const userData ={
             _id: data.id,
             email: data.email_addresses[0].email_address,
@@ -38,11 +40,14 @@ const clerkWebhooks = async (req ,res) =>{
                 await User.findByIdAndUpdate(data.id,userData);
                 break;
             }
+            
+
 
             case "user.deleted":{
                 await User.findByIdAndDelete(data.id);
                 break;
             }
+           
 
             default:
                 break;
