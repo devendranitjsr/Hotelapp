@@ -96,12 +96,12 @@ const AllRooms = () => {
     return 0;
   };
 
+  // 🔹 FIXED: optional chaining added
   const filterDestination = (room) => {
     const destination = searchParams.get("destination");
     if (!destination) return true;
-    return room.hotel.city.toLowerCase().includes(destination.toLowerCase());
+    return room.hotel?.city?.toLowerCase().includes(destination.toLowerCase());
   };
-
 
   const filteredRooms = useMemo(() => {
     return rooms
@@ -139,13 +139,13 @@ const AllRooms = () => {
                 navigate(`/rooms/${room._id}`);
                 scrollTo(0, 0);
               }}
-              src={room.images[0]}
+              src={room.images?.[0] || "/fallback-hotel.jpg"} // 🔹 FIXED
               alt="hotel-img"
               title="View Room Details"
               className="max-h-65 md:w-1/2 rounded-xl shadow-lg object-cover cursor-pointer"
             />
             <div className="md:w-1/2 flex flex-col gap-2">
-              <p className="text-gray-500">{room.hotel.city}</p>
+              <p className="text-gray-500">{room.hotel?.city || "Unknown City"}</p>
               <p
                 onClick={() => {
                   navigate(`/rooms/${room._id}`);
@@ -153,7 +153,7 @@ const AllRooms = () => {
                 }}
                 className="text-gray-800 text-3xl font-playfair cursor-pointer"
               >
-                {room.hotel.name}
+                {room.hotel?.name || "Deleted Hotel"}
               </p>
               <div className="flex items-center">
                 <StarRating />
@@ -161,10 +161,10 @@ const AllRooms = () => {
               </div>
               <div className="flex items-center gap-1 text-gray-500 mt-2 text-sm">
                 <img src={assets.locationIcon} alt="location-Icon" />
-                <span>{room.hotel.address}</span>
+                <span>{room.hotel?.address || "Address not available"}</span>
               </div>
               <div className="flex flex-wrap items-center mt-3 mb-6 gap-4">
-                {room.amenities.map((item, index) => (
+                {room.amenities?.map((item, index) => (
                   <div
                     key={index}
                     className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#F5F5FF]/70 "
@@ -175,7 +175,7 @@ const AllRooms = () => {
                 ))}
               </div>
               <p className="text-xl font-medium text-gray-700">
-                ${room.pricePerNight} /night
+                ₹ {room.pricePerNight} /night
               </p>
             </div>
           </div>

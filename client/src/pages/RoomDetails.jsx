@@ -160,7 +160,7 @@ import toast from "react-hot-toast";
               ))}
             </div>
           </div>
-          <p className="text-2xl font-medium">${room.pricePerNight}/night</p>
+          <p className="text-2xl font-medium">₹{room.pricePerNight}/night</p>
         </div>
 
         {/* CheckIn CheckOut Form */}
