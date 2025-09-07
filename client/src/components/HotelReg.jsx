@@ -10,7 +10,7 @@ const HotelReg = () =>{
     const [address,setAddress] = useState("")
     const [contact,setContact] = useState("")
     const [city,setCity] = useState("")
-    // const [country, setCountry] = useState(""); // ✅ added
+    // const [country, setCountry] = useState(""); //  added
 
     const onSubmitHandler = async (event)=>{
         try{
@@ -32,9 +32,6 @@ const HotelReg = () =>{
                 toast.error(error.message)
         }
     }
-
-
-
 
     return(
         <div onClick={()=>setShowHotelReg(false)} className='fixed top-0 bottom-0 left-0 right-0 z-100 flex items-center justify-center bg-black/70'>
